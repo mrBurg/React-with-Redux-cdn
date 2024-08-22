@@ -1,0 +1,9 @@
+#root {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+.header,
+.footer {
+  background-color: var(--bg-section-color);
+}

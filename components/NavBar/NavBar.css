@@ -1,0 +1,14 @@
+.nav-bar {
+  margin: auto;
+  width: fit-content;
+}
+
+.nav-bar__link {
+  padding: 0.5em;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.nav-bar__link:hover {
+  text-decoration: underline;
+}
