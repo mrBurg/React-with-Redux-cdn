@@ -3,39 +3,36 @@
 import { increment, decrement } from '/app/action.js';
 import { SimpleButton } from '/components/ui/SimpleButton/SimpleButton.js';
 
-const { createElement, Component } = React;
+const { createElement: create, Component } = React;
 const { connect } = ReactRedux;
 
 class CounterComponent extends Component {
   render() {
-    const { counter, increment, decrement } = this.props;
+    const {
+      counter: { counter },
+      increment,
+      decrement,
+    } = this.props;
 
-    return createElement(
+    return create(
       'div',
       { className: 'counter' },
-      createElement(
-        'div',
-        { className: 'counter__scoreboard' },
-        `Count: ${counter}`
-      ),
-      createElement(SimpleButton, { callback: decrement }, 'Decrement'),
-      createElement(SimpleButton, { callback: increment }, 'Increment')
+      create('div', { className: 'counter__scoreboard' }, `Count: ${counter}`),
+      create(SimpleButton, { callback: decrement }, 'Decrement'),
+      create(SimpleButton, { callback: increment }, 'Increment')
     );
   }
 }
 
-const mapStateToProps = (state) => ({
-  counter: state.counter,
-});
+const mapStateToProps = (state) => ({ counter: state.counter });
 
 const mapDispatchToProps = (dispatch) => ({
-  decrement: () => dispatch(decrement(2)),
+  decrement: () => dispatch(decrement(5)),
   increment: () => dispatch(increment(5)),
+  dispatch,
 });
+const Counter = connect(mapStateToProps, mapDispatchToProps)(CounterComponent);
 
-const CounterPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(CounterComponent);
-
-export default CounterPage;
+export default function CounterPage() {
+  return create(Counter);
+}

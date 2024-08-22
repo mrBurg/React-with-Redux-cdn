@@ -4,7 +4,7 @@ import { appendStyle } from '/utils/common.js';
 
 appendStyle('/components/ui/SimpleLink/SimpleLink.css');
 
-const { createElement } = React;
+const { createElement: create } = React;
 
 export const SimpleLink = ({ text, href }) =>
-  createElement('a', { className: 'simple-link', href }, text);
+  create('a', { className: 'simple-link', href }, text);

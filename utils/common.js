@@ -63,4 +63,4 @@ const delay = (() => {
   };
 })();
 
-export { $, $$, create, appendStyle, prependStyle, appendScript, delay };
+export { $, $$, appendStyle, prependStyle, appendScript, delay };

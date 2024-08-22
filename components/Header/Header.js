@@ -5,7 +5,7 @@ import { NavBar } from '/components/NavBar/NavBar.js';
 
 appendStyle('/components/Header/Header.css');
 
-const { createElement } = React;
+const { createElement: create } = React;
 
 export const Header = () =>
-  createElement('header', { className: 'header' }, createElement(NavBar));
+  create('header', { className: 'header' }, create(NavBar));

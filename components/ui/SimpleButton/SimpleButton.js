@@ -4,10 +4,10 @@ import { appendStyle } from '/utils/common.js';
 
 appendStyle('/components/ui/SimpleButton/SimpleButton.css');
 
-const { createElement } = React;
+const { createElement: create } = React;
 
 export const SimpleButton = ({ children, className, callback }) =>
-  createElement(
+  create(
     'button',
     {
       className: classNames('simple-button', className),

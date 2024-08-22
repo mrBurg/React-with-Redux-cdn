@@ -2,7 +2,7 @@
 
 import { $, delay } from '/utils/common.js';
 
-const { createElement, useEffect, useRef, useState } = React;
+const { createElement: create, useEffect, useRef, useState } = React;
 
 export default function CanvasPage() {
   const cnv = useRef(null);
@@ -13,11 +13,10 @@ export default function CanvasPage() {
       const rectBound = { width: 40, height: 20 };
       const ctx = cnv.current.getContext('2d');
 
-      ctx.fillStyle = '#fff';
-
       const mousemoveHandler = (event) => {
-        setCursor('no-cursor');
+        setCursor(() => 'no-cursor');
 
+        ctx.fillStyle = '#fff';
         ctx.clearRect(0, 0, cnv.current.width, cnv.current.height);
         ctx.fillRect(
           event.offsetX - rectBound.width / 2,
@@ -26,7 +25,7 @@ export default function CanvasPage() {
           rectBound.height
         );
 
-        delay(() => setCursor(''), 200);
+        delay(() => setCursor(() => ''), 200);
       };
 
       cnv.current.addEventListener('mousemove', mousemoveHandler);
@@ -39,7 +38,7 @@ export default function CanvasPage() {
     }
   }, []);
 
-  return createElement('canvas', {
+  return create('canvas', {
     ref: cnv,
     className: hasCursor ?? null,
     width: $('main').clientWidth,

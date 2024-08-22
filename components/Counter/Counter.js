@@ -6,36 +6,42 @@ import { increment, decrement } from '/app/action.js';
 
 appendStyle('/components/Counter/Counter.css');
 
-const { createElement, useState } = React;
-const { connect, useDispatch, useSelector } = ReactRedux;
+const { createElement: create, useState, useCallback, useEffect } = React;
+const { useDispatch, useSelector } = ReactRedux;
 
-const CounterComponent = ({ counter }) => {
-  const data = useSelector(() => counter);
-  const [count, setCount] = useState(data);
+export const Counter = () => {
+  const counter = useSelector((state) => state.counter.counter);
+  const [count, setCount] = useState(counter);
 
   const dispatch = useDispatch();
 
-  const IncrementHandleClick = () => setCount(count + 1);
-  const decrementHandleClick = () => setCount(count - 1);
+  const IncrementHandle = useCallback(() => dispatch(increment(2)), [dispatch]);
+  const decrementHandle = useCallback(() => dispatch(decrement(2)), [dispatch]);
 
-  return createElement(
+  return create(
     'div',
     { className: 'counter' },
-    createElement('div', { className: 'counter__scoreboard' }, count),
-    createElement(SimpleButton, { callback: decrementHandleClick }, '-'),
-    createElement(SimpleButton, { callback: IncrementHandleClick }, '+'),
-    createElement(
-      SimpleButton,
-      { callback: () => dispatch(decrement()) },
-      'dispatch -'
+    create(
+      'div',
+      { className: 'counter__scoreboard' },
+      `Store state ${counter}`
     ),
-    createElement(
+    create(SimpleButton, { callback: decrementHandle }, 'Dispatch decrement'),
+    create(SimpleButton, { callback: IncrementHandle }, 'Dispatch increment'),
+    create(
+      'div',
+      { className: 'counter__scoreboard' },
+      `Counter state ${count}`
+    ),
+    create(
       SimpleButton,
-      { callback: () => dispatch(increment()) },
-      'dispatch +'
+      { callback: () => setCount((count) => count - 1) },
+      '-'
+    ),
+    create(
+      SimpleButton,
+      { callback: () => setCount((count) => count + 1) },
+      '+'
     )
   );
 };
-
-const mapStateToProps = (state) => ({ counter: state.counter });
-export const Counter = connect(mapStateToProps)(CounterComponent);
