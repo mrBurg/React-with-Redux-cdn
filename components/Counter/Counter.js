@@ -6,7 +6,7 @@ import { increment, decrement } from '/app/action.js';
 
 appendStyle('/components/Counter/Counter.css');
 
-const { createElement: create, useState, useCallback, useEffect } = React;
+const { createElement: create, useState, useCallback } = React;
 const { useDispatch, useSelector } = ReactRedux;
 
 export const Counter = () => {

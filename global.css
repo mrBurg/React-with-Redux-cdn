@@ -20,6 +20,15 @@ body {
   display: grid;
 }
 
+a {
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 .no-cursor {
   cursor: none;
 }

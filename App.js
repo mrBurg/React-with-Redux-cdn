@@ -1,65 +1,58 @@
 'use strict';
 
-import { prependStyle } from '/utils/common.js';
+import { cfg } from '/config.js';
+import { $$, prependStyle } from '/utils/common.js';
 import { Header } from '/components/Header/Header.js';
 import { Main } from '/components/Main/Main.js';
 import { Footer } from '/components/Footer/Footer.js';
+import { NotFound } from '/components/NotFound/NotFound.js';
 
 prependStyle('/App.css');
 
-const { createElement: create, lazy, Suspense, useCallback } = React;
-const { BrowserRouter, Switch, Redirect, Route } = ReactRouterDOM;
-const { useSelector } = ReactRedux;
+const { createElement: create, lazy, Suspense } = React;
+const { BrowserRouter, Switch, Redirect, Route, useLocation } = ReactRouterDOM;
 
-export const App = () => {
-  const state = useSelector((state) => state);
-  console.log('App', state);
-
-  const navItems = useSelector((state) => state.navbar.navItems);
-
-  const loadComponent = useCallback((componentName) => {
-    switch (componentName) {
-      case 'HomePage':
-        return lazy(() => import('/pages/index.js'));
-
-      case 'CanvasPage':
-        return lazy(() => import('/pages/canvas.js'));
-
-      case 'CounterPage':
-        return lazy(() => import('/pages/counter.js'));
-
-      default:
-        return () => null;
-      // throw new Error(`Component ${componentName} not found`);
-    }
-  }, []);
+const Content = () => {
+  const route = useLocation();
+  const { component } = _.find(
+    cfg.navItems,
+    (item) => item.href == route.pathname
+  );
 
   return create(
+    Suspense,
+    { fallback: create('div', { className: 'loading' }, 'Loading...') },
+    null,
+    create(
+      // lazy(() => import(`/pages/${component}`))
+      lazy(() =>
+        new Promise((resolve) => {
+          const data = import(`/pages/${component}`);
+
+          setTimeout(() => resolve(data), 500);
+        }).then((data) => data)
+      )
+    )
+  );
+};
+
+export const App = () =>
+  create(
     BrowserRouter,
     null,
     create(
       Switch,
       null,
       create(Redirect, { from: '/redirect', to: '/' }),
-      ...navItems.map((item) => {
-        const Page = loadComponent(item.component);
-
-        return create(
+      ...cfg.navItems.map((item) =>
+        create(
           Route,
           { path: item.href, exact: item.exact },
           create(Header),
-          create(
-            Main,
-            null,
-            create(
-              Suspense,
-              { fallback: create('div', null, 'Loading...') },
-              create(Page)
-            )
-          ),
+          create(Main, null, create(Content)),
           !item.noFooter && create(Footer)
-        );
-      })
+        )
+      ),
+      create(Route, { path: '/*' }, create(Main, null, create(NotFound)))
     )
   );
-};

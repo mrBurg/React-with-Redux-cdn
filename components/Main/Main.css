@@ -1,3 +1,15 @@
 .main {
   color: var(--text-color);
+  flex-grow: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.loading,
+.not-found {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* align-content: center; */
 }
