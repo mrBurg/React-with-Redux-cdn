@@ -1,17 +1,23 @@
 'use strict';
 
-import { appendStyle } from '/utils/common.js';
+import { appendStyle } from '/utils/files.js';
 
 appendStyle('/components/ui/SimpleButton/SimpleButton.css');
 
 const { createElement: create } = React;
 
-export const SimpleButton = ({ children, className, callback }) =>
+export const SimpleButton = ({ children, className, onClick = _.noop }) =>
   create(
     'button',
     {
       className: classNames('simple-button', className),
-      onClick: callback,
+      onClick,
     },
     children
   );
+
+SimpleButton.propTypes = {
+  children: PropTypes.string.isRequired,
+  className: PropTypes.string,
+  onClick: PropTypes.func,
+};

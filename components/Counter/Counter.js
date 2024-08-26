@@ -1,6 +1,6 @@
 'use strict';
 
-import { appendStyle } from '/utils/common.js';
+import { appendStyle } from '/utils/files.js';
 import { SimpleButton } from '/components/ui/SimpleButton/SimpleButton.js';
 import { increment, decrement } from '/app/action.js';
 
@@ -26,8 +26,8 @@ export const Counter = () => {
       { className: 'counter__scoreboard' },
       `Store state ${counter}`
     ),
-    create(SimpleButton, { callback: decrementHandle }, 'Dispatch decrement'),
-    create(SimpleButton, { callback: IncrementHandle }, 'Dispatch increment'),
+    create(SimpleButton, { onClick: decrementHandle }, 'Decrement'),
+    create(SimpleButton, { onClick: IncrementHandle }, 'Increment'),
     create(
       'div',
       { className: 'counter__scoreboard' },
@@ -35,13 +35,9 @@ export const Counter = () => {
     ),
     create(
       SimpleButton,
-      { callback: () => setCount((count) => count - 1) },
+      { onClick: () => setCount((count) => count - 1) },
       '-'
     ),
-    create(
-      SimpleButton,
-      { callback: () => setCount((count) => count + 1) },
-      '+'
-    )
+    create(SimpleButton, { onClick: () => setCount((count) => count + 1) }, '+')
   );
 };

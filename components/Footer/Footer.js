@@ -1,6 +1,6 @@
 'use strict';
 
-import { appendStyle } from '/utils/common.js';
+import { appendStyle } from '/utils/files.js';
 
 appendStyle('/components/Footer/Footer.css');
 

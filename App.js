@@ -1,7 +1,7 @@
 'use strict';
 
-import { cfg } from '/config.js';
-import { $$, prependStyle } from '/utils/common.js';
+import cfg from '/config.js';
+import { prependStyle } from '/utils/files.js';
 import { Header } from '/components/Header/Header.js';
 import { Main } from '/components/Main/Main.js';
 import { Footer } from '/components/Footer/Footer.js';
@@ -10,12 +10,13 @@ import { NotFound } from '/components/NotFound/NotFound.js';
 prependStyle('/App.css');
 
 const { createElement: create, lazy, Suspense } = React;
-const { BrowserRouter, Switch, Redirect, Route, useLocation } = ReactRouterDOM;
+const { HashRouter /* BrowserRouter */, Switch, Redirect, Route, useLocation } =
+  ReactRouterDOM;
 
 const Content = () => {
   const route = useLocation();
   const { component } = _.find(
-    cfg.navItems,
+    cfg.mainPages,
     (item) => item.href == route.pathname
   );
 
@@ -36,23 +37,36 @@ const Content = () => {
   );
 };
 
+const NestPage = () =>
+  create(
+    Suspense,
+    { fallback: create('div', { className: 'loading' }, 'Loading...') },
+    null,
+    create(lazy(() => import('/pages/nest-page.js')))
+  );
+
 export const App = () =>
   create(
-    BrowserRouter,
+    HashRouter, // BrowserRouter
     null,
     create(
       Switch,
       null,
       create(Redirect, { from: '/redirect', to: '/' }),
-      ...cfg.navItems.map((item) =>
+      cfg.mainPages.map((item) =>
         create(
           Route,
-          { path: item.href, exact: item.exact },
+          { key: item.href, path: item.href, exact: item.exact },
           create(Header),
           create(Main, null, create(Content)),
           !item.noFooter && create(Footer)
         )
       ),
-      create(Route, { path: '/*' }, create(Main, null, create(NotFound)))
+      create(
+        Route,
+        { path: '/page/:pageId', exact: true },
+        create(Main, null, create(NestPage))
+      ),
+      create(Route, { path: '*' }, create(Main, null, create(NotFound)))
     )
   );

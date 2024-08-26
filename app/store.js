@@ -2,11 +2,11 @@
 
 import { reducer, navbarReducer } from '/app/reducer.js';
 
-const { createStore, combineReducers, applyMiddleware } = Redux;
+const { createStore, combineReducers, applyMiddleware, compose } = Redux;
 
 // console.log(ReduxThunk);
 
-function logger({ getState }) {
+/* function logger({ getState }) {
   return (next) => (action) => {
     console.log('will dispatch', action);
 
@@ -19,18 +19,16 @@ function logger({ getState }) {
     // a middleware further in chain changed it.
     return returnValue;
   };
-}
+} */
 
 export const store = createStore(
   combineReducers({ counter: reducer, navbar: navbarReducer }),
   {},
-  applyMiddleware(
-    logger,
-    ReduxThunk
-    /* window.__REDUX_DEVTOOLS_EXTENSION__ &&
-      window.__REDUX_DEVTOOLS_EXTENSION__(),
-    window.__REDUX_DEVTOOLS_EXTENSION__
-      ? window.__REDUX_DEVTOOLS_EXTENSION__()
-      : (f) => f */
+  compose(
+    applyMiddleware(
+      // logger,
+      ReduxThunk
+    ),
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );

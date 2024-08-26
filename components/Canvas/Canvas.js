@@ -1,6 +1,7 @@
 'use strict';
 
-import { $, delay, appendStyle } from '/utils/common.js';
+import { $, delay } from '/utils/common.js';
+import { appendStyle } from '/utils/files.js';
 
 appendStyle('/components/Canvas/Canvas.css');
 

@@ -1,6 +1,6 @@
 'use strict';
 
-import { prependStyle } from '/utils/common.js';
+import { prependStyle } from '/utils/files.js';
 
 prependStyle('/components/NotFound/NotFound.css');
 

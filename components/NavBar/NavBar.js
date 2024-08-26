@@ -1,22 +1,36 @@
 'use strict';
 
-import { cfg } from '/config.js';
-import { appendStyle } from '/utils/common.js';
+import { appendStyle } from '/utils/files.js';
 
 appendStyle('/components/NavBar/NavBar.css');
 
 const { createElement: create } = React;
-const { Link } = ReactRouterDOM;
+const { Link, useLocation } = ReactRouterDOM;
 
-export const NavBar = () => {
+export const NavBar = ({ items }) => {
+  const route = useLocation();
+  console.log(route);
+  console.log(items);
+
   return create(
     'nav',
     { className: 'nav-bar' },
-    ...cfg.navItems.map((item) =>
-      create(Link, { className: 'nav-bar__link', to: item.href }, item.text)
-    ),
-    ...cfg.serviceNavItems.map((item) =>
-      create(Link, { className: 'nav-bar__link', to: item.href }, item.text)
+    items.map((item) =>
+      create(
+        Link,
+        {
+          key: item.href,
+          className: classNames('nav-bar__link', {
+            ['active']: item.href == route.pathname,
+          }),
+          to: item.href,
+        },
+        item.text
+      )
     )
   );
+};
+
+NavBar.propTypes = {
+  items: PropTypes.array.isRequired,
 };

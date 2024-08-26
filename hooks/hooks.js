@@ -1,5 +1,8 @@
 const { useMemo } = React;
 const { useDispatch, bindActionCreators } = ReactRedux;
+const { useLocation } = ReactRouterDOM;
+
+export const useRouter = () => useLocation();
 
 export const useActions = (actions, deps) => {
   const dispatch = useDispatch();

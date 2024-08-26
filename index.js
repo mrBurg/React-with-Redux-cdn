@@ -1,6 +1,7 @@
 'use strict';
 
-import { $, prependStyle } from '/utils/common.js';
+import { $ } from '/utils/common.js';
+import { prependStyle } from '/utils/files.js';
 import { store } from '/app/store.js';
 import { App } from '/App.js';
 

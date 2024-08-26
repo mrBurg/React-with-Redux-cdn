@@ -1,14 +1,15 @@
 'use strict';
 
+import cfg from '/config.js';
 import { Counter } from '/components/Counter/Counter.js';
 
 const { createElement: create, useEffect } = React;
 
-export default function HomePage() {
+export default () => {
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch('https://randomuser.me/api/?results=10');
+        const response = await fetch(cfg.fetchData.todos);
         const data = await response.json();
         console.log(data);
       } catch (error) {
@@ -20,4 +21,4 @@ export default function HomePage() {
   }, []);
 
   return create(Counter);
-}
+};
