@@ -25,14 +25,14 @@ const Content = () => {
     { fallback: create('div', { className: 'loading' }, 'Loading...') },
     null,
     create(
-      // lazy(() => import(`/pages/${component}`))
-      lazy(() =>
-        new Promise((resolve) => {
-          const data = import(`/pages/${component}`);
+      lazy(() => import(`/pages/${component}`))
+      // lazy(() =>
+      //   new Promise((resolve) => {
+      //     const data = import(`/pages/${component}`);
 
-          setTimeout(() => resolve(data), 500);
-        }).then((data) => data)
-      )
+      //     setTimeout(() => resolve(data), 500);
+      //   }).then((data) => data)
+      // )
     )
   );
 };
@@ -53,6 +53,13 @@ export const App = () =>
       Switch,
       null,
       create(Redirect, { from: '/redirect', to: '/' }),
+      create(
+        Route,
+        { path: '/page/:pageId', exact: true },
+        create(Header),
+        create(Main, null, create(NestPage)),
+        create(Footer)
+      ),
       cfg.mainPages.map((item) =>
         create(
           Route,
@@ -61,11 +68,6 @@ export const App = () =>
           create(Main, null, create(Content)),
           !item.noFooter && create(Footer)
         )
-      ),
-      create(
-        Route,
-        { path: '/page/:pageId', exact: true },
-        create(Main, null, create(NestPage))
       ),
       create(Route, { path: '*' }, create(Main, null, create(NotFound)))
     )

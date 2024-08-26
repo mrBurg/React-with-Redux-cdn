@@ -1,7 +1,10 @@
 'use strict';
 
+import { appendStyle } from '/utils/files.js';
 import { increment, decrement } from '/app/action.js';
 import { SimpleButton } from '/components/ui/SimpleButton/SimpleButton.js';
+
+appendStyle('/components/Counter/Counter.css');
 
 const { createElement: create, Component } = React;
 const { connect } = ReactRedux;
@@ -24,7 +27,7 @@ class CounterComponent extends Component {
   }
 }
 
-const mapStateToProps = (state) => ({ counter: state.counter });
+const mapStateToProps = (state) => ({ counter: state });
 
 const mapDispatchToProps = (dispatch) => ({
   decrement: () => dispatch(decrement(5)),

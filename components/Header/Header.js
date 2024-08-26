@@ -13,6 +13,6 @@ export const Header = () =>
     'header',
     { className: 'header' },
     create(NavBar, {
-      items: [...cfg.mainPages, ...cfg.additionalPages, ...cfg.serviceNavItems],
+      items: [...cfg.mainPages, ...cfg.serviceNavItems],
     })
   );

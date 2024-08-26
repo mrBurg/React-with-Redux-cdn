@@ -10,7 +10,7 @@ const { createElement: create, useState, useCallback } = React;
 const { useDispatch, useSelector } = ReactRedux;
 
 export const Counter = () => {
-  const counter = useSelector((state) => state.counter.counter);
+  const counter = useSelector((state) => state.counter);
   const [count, setCount] = useState(counter);
 
   const dispatch = useDispatch();

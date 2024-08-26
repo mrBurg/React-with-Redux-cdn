@@ -1,24 +1,22 @@
 'use strict';
 
-import { INCREMENT, DECREMENT } from '/app/action.js';
+import { INCREMENT, DECREMENT, UPDATE_USERS } from '/app/action.js';
 
-const initialState = { counter: 0, data: 'Data' };
-
-export const reducer = (state = initialState, action) => {
+export const counterReducer = (state = 0, action) => {
   switch (action.type) {
     case INCREMENT:
-      return { ...state, counter: state.counter + action.payload };
+      return state + action.payload;
     case DECREMENT:
-      return { ...state, counter: state.counter - action.payload };
+      return state - action.payload;
     default:
       return state;
   }
 };
 
-export const navbarInitialState = {};
-
-export const navbarReducer = (state = navbarInitialState, action) => {
+export const usersReducer = (state = [], action) => {
   switch (action.type) {
+    case UPDATE_USERS:
+      return action.payload;
     default:
       return state;
   }

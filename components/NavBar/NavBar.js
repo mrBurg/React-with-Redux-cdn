@@ -9,8 +9,6 @@ const { Link, useLocation } = ReactRouterDOM;
 
 export const NavBar = ({ items }) => {
   const route = useLocation();
-  console.log(route);
-  console.log(items);
 
   return create(
     'nav',

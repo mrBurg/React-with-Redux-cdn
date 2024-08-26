@@ -4,5 +4,15 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {},
+	"launch": {
+		"configurations": [
+			{
+				"type": "msedge",
+				"name": "http://localhost:5500/",
+				"request": "launch",
+				"url": "http://localhost:5500/"
+			}
+		]
+	}
 }

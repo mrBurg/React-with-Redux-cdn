@@ -3,6 +3,13 @@
 export const INCREMENT = 'counter/increment';
 export const DECREMENT = 'counter/decrement';
 
+export const increment = (payload = 1) => ({ type: INCREMENT, payload });
+export const decrement = (payload = 1) => ({ type: DECREMENT, payload });
+
+export const UPDATE_USERS = 'users/update';
+
+export const updateUsers = (payload) => ({ type: UPDATE_USERS, payload });
+
 /* export const fetchData = () => {
   return (dispatch) => {
     dispatch({ type: 'FETCH_DATA_REQUEST' });
@@ -17,6 +24,3 @@ export const DECREMENT = 'counter/decrement';
       });
   };
 }; */
-
-export const increment = (payload = 1) => ({ type: INCREMENT, payload });
-export const decrement = (payload = 1) => ({ type: DECREMENT, payload });

@@ -10,38 +10,17 @@ export default {
       href: '/canvas',
       text: 'Canvas',
       component: 'canvas.js',
-      exact: true,
       noFooter: true,
     },
     {
       href: '/counter',
       text: 'Counter',
       component: 'counter.js',
-      exact: true,
     },
-  ],
-  additionalPages: [
     {
-      href: '/page/desc',
+      href: '/page',
       text: 'Nest Page',
-      exact: true,
-    },
-  ],
-  nestedPages: [
-    {
-      href: '/page/1',
-      text: 'Nest Page 1',
-      exact: true,
-    },
-    {
-      href: '/page/2',
-      text: 'Nest Page 2',
-      exact: true,
-    },
-    {
-      href: '/page/3',
-      text: 'Nest Page 3',
-      exact: true,
+      component: 'nest-page.js',
     },
   ],
   serviceNavItems: [
