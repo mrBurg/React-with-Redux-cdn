@@ -13,17 +13,17 @@ export const NavBar = ({ items }) => {
   return create(
     'nav',
     { className: 'nav-bar' },
-    items.map((item) =>
+    items.map(({ path, text }) =>
       create(
         Link,
         {
-          key: item.href,
+          key: path,
           className: classNames('nav-bar__link', {
-            ['active']: item.href == route.pathname,
+            ['active']: path == route.pathname,
           }),
-          to: item.href,
+          to: path,
         },
-        item.text
+        text
       )
     )
   );

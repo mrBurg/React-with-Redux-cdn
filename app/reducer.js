@@ -1,6 +1,6 @@
 'use strict';
 
-import { INCREMENT, DECREMENT, UPDATE_USERS } from '/app/action.js';
+import { INCREMENT, DECREMENT, UPDATE_POSTS } from '/app/action.js';
 
 export const counterReducer = (state = 0, action) => {
   switch (action.type) {
@@ -13,9 +13,9 @@ export const counterReducer = (state = 0, action) => {
   }
 };
 
-export const usersReducer = (state = [], action) => {
+export const postsReducer = (state = [], action) => {
   switch (action.type) {
-    case UPDATE_USERS:
+    case UPDATE_POSTS:
       return action.payload;
     default:
       return state;

@@ -13,6 +13,9 @@ export const Header = () =>
     'header',
     { className: 'header' },
     create(NavBar, {
-      items: [...cfg.mainPages, ...cfg.serviceNavItems],
+      items: _.orderBy(
+        [...cfg.mainPages, ...cfg.testPages],
+        ({ order }) => order
+      ),
     })
   );

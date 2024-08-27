@@ -1,12 +1,12 @@
 'use strict';
 
-import { counterReducer, usersReducer } from '/app/reducer.js';
+import { counterReducer, postsReducer } from '/app/reducer.js';
 // import { logger } from '/app/middleware.js';
 
 const { createStore, combineReducers, applyMiddleware, compose } = Redux;
 
 export const store = createStore(
-  combineReducers({ counter: counterReducer, users: usersReducer }),
+  combineReducers({ counter: counterReducer, posts: postsReducer }),
   {},
   compose(
     applyMiddleware(/* logger, */ ReduxThunk),

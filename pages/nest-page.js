@@ -1,7 +1,7 @@
 'use strict';
 
 import cfg from '/config.js';
-import { updateUsers } from '/app/action.js';
+import { updatePosts } from '/app/action.js';
 
 const { createElement: create, Fragment, useEffect } = React;
 const { Link, useParams } = ReactRouterDOM;
@@ -10,15 +10,15 @@ const { useDispatch, useSelector } = ReactRedux;
 export default () => {
   const { pageId } = useParams();
   const dispatch = useDispatch();
-  const users = useSelector((state) => state.users);
+  const posts = useSelector(({ posts }) => posts);
 
   useEffect(() => {
     const getUser = async () => {
       try {
-        const response = await fetch(cfg.fetchData.users);
+        const response = await fetch(cfg.fetchData.posts);
         const data = await response.json();
 
-        dispatch(updateUsers(data)), [dispatch];
+        dispatch(updatePosts(data)), [dispatch];
       } catch (error) {
         console.error('Error fetching user data:', error);
       }
@@ -43,7 +43,7 @@ export default () => {
       create(
         'div',
         null,
-        users.map((item) =>
+        posts.map((item) =>
           create(
             'div',
             { key: item.id },
@@ -52,11 +52,11 @@ export default () => {
         )
       ),
       pageId &&
-        users.length &&
+        !_.isEmpty(posts) &&
         create(
           'div',
           null,
-          _.find(users, (user) => String(user.id) == pageId).phone
+          _.find(posts, ({ id }) => String(id) == pageId).phone
         ),
       create(Link, { to: '/page' }, 'To Top')
     )

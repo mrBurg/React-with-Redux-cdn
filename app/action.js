@@ -6,9 +6,9 @@ export const DECREMENT = 'counter/decrement';
 export const increment = (payload = 1) => ({ type: INCREMENT, payload });
 export const decrement = (payload = 1) => ({ type: DECREMENT, payload });
 
-export const UPDATE_USERS = 'users/update';
+export const UPDATE_POSTS = 'posts/update';
 
-export const updateUsers = (payload) => ({ type: UPDATE_USERS, payload });
+export const updatePosts = (payload) => ({ type: UPDATE_POSTS, payload });
 
 /* export const fetchData = () => {
   return (dispatch) => {
