@@ -1,40 +1,54 @@
 export default {
   mainPages: [
     {
-      href: '/',
+      path: '/',
       text: 'Home',
+      order: 0,
       component: 'index.js',
       exact: true,
     },
     {
-      href: '/canvas',
+      path: '/counter',
+      text: 'Counter',
+      order: 1,
+      component: 'counter.js',
+    },
+    {
+      path: '/canvas',
       text: 'Canvas',
+      order: 2,
       component: 'canvas.js',
       noFooter: true,
     },
     {
-      href: '/counter',
-      text: 'Counter',
-      component: 'counter.js',
-    },
-    {
-      href: '/page',
+      path: '/page',
       text: 'Nest Page',
+      order: 3,
       component: 'nest-page.js',
+      exact: true,
+      noFooter: true,
     },
   ],
-  serviceNavItems: [
+  nestPages: [
     {
-      href: '/redirect',
+      path: '/page/:pageId',
+      text: 'Nest Page',
+      component: 'nest-page.js',
+      noFooter: true,
+    },
+  ],
+  testPages: [
+    {
+      path: '/redirect',
       text: 'Redirect',
     },
     {
-      href: '/not-found',
+      path: '/not-found',
       text: 'Not found',
     },
   ],
   fetchData: {
-    users: 'https://jsonplaceholder.typicode.com/users',
+    users: 'https://jsonplaceholder.typicode.com/users/?size=50',
     posts: 'https://jsonplaceholder.typicode.com/posts',
     comments: 'https://jsonplaceholder.typicode.com/comments',
     todos: 'https://jsonplaceholder.typicode.com/todos',

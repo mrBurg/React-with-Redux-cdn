@@ -1,0 +1,16 @@
+{
+  "name": "project",
+  "version": "1.0.0",
+  "description": "Test Project",
+  "main": "index.js",
+  "dependencies": {
+    "typescript": "^5.5.4"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "ts": "tsc ./ts/index",
+    "sass": "sass ./sass/input.scss ./sass/output.css"
+  },
+  "author": "",
+  "license": "ISC"
+}
