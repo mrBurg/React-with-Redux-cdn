@@ -8,7 +8,7 @@
   },
   "devDependencies": {},
   "scripts": {
-    "ts": "tsc ./ts/index",
+    "ts": "tsc ./ts/index.ts",
     "sass": "sass ./sass/input.scss ./sass/output.css"
   },
   "author": "",
