@@ -47,7 +47,7 @@ export default () => {
           create(
             'div',
             { key: item.id },
-            create(Link, { to: `/page/${item.id}` }, item.name)
+            create(Link, { to: `/page/${item.id}` }, `Post #${item.id}`)
           )
         )
       ),
@@ -56,7 +56,9 @@ export default () => {
         create(
           'div',
           null,
-          _.find(posts, ({ id }) => String(id) == pageId).phone
+          _.find(posts, ({ id }) => String(id) == pageId).title,
+          create('br'),
+          _.find(posts, ({ id }) => String(id) == pageId).body
         ),
       create(Link, { to: '/page' }, 'To Top')
     )

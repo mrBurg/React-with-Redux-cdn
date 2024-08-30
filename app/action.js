@@ -1,12 +1,12 @@
 'use strict';
 
-export const INCREMENT = 'counter/increment';
-export const DECREMENT = 'counter/decrement';
+export const INCREMENT = '@@counter/INCREMENT';
+export const DECREMENT = '@@counter/DECREMENT';
 
 export const increment = (payload = 1) => ({ type: INCREMENT, payload });
 export const decrement = (payload = 1) => ({ type: DECREMENT, payload });
 
-export const UPDATE_POSTS = 'posts/update';
+export const UPDATE_POSTS = '@posts/UPDATE';
 
 export const updatePosts = (payload) => ({ type: UPDATE_POSTS, payload });
 
