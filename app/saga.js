@@ -1,24 +1,30 @@
 'use strict';
 
-import { SAGA_INCREMENT, SAGA_DECREMENT } from '/app/action.js';
+import {
+  SAGA_INCREMENT,
+  SAGA_DECREMENT,
+  SAGA_INCREMENT_EVENT,
+  SAGA_DECREMENT_EVENT,
+} from '/app/action.js';
 
-const { takeEvery, call } = ReduxSaga.effects;
+const { takeEvery, call, put } = ReduxSaga.effects;
 
 export const delay = (ms) =>
   new Promise((res) => {
     setTimeout(res, ms);
   });
 
-const sagaIncrementHandler = (data) => {
-  console.log(data);
-};
+function* sagaIncrementHandler(data) {
+  yield call(delay, 1000);
+  yield put({ ...data, type: SAGA_INCREMENT_EVENT });
+}
 
-const sagaDecrementHandler = (data) => {
-  console.log(data);
-};
+function* sagaDecrementHandler(data) {
+  yield call(delay, 1000);
+  yield put({ ...data, type: SAGA_DECREMENT_EVENT });
+}
 
 export function* rootSaga() {
-  yield call(delay, 1000);
   yield takeEvery(SAGA_INCREMENT, sagaIncrementHandler);
   yield takeEvery(SAGA_DECREMENT, sagaDecrementHandler);
 }
@@ -34,13 +40,5 @@ function* fetchDataSaga() {
   } catch (error) {
     yield put({ type: 'FETCH_DATA_FAILURE', payload: error });
   }
-}
-
-function* watchFetchData() {
-  yield takeEvery('FETCH_DATA', fetchDataSaga);
-}
-
-export default function* rootSaga() {
-  yield watchFetchData();
 }
  */

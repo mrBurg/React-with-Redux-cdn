@@ -30,11 +30,11 @@ export const Counter = () => {
   }, [dispatch]);
 
   const sagaIncrementHandle = useCallback(() => {
-    dispatch(sagaIncrement(3));
+    dispatch(sagaIncrement(10));
   }, [dispatch]);
 
   const sagaDecrementHandle = useCallback(() => {
-    dispatch(sagaDecrement(3));
+    dispatch(sagaDecrement(10));
   }, [dispatch]);
 
   const resetHandle = useCallback(() => {

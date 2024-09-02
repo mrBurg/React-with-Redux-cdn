@@ -5,17 +5,17 @@ import {
   DECREMENT,
   RESET,
   UPDATE_POSTS,
-  // SAGA_INCREMENT,
-  // SAGA_DECREMENT,
+  SAGA_INCREMENT_EVENT,
+  SAGA_DECREMENT_EVENT,
 } from '/app/action.js';
 
 export const counterReducer = (state = 0, action) => {
   switch (action.type) {
     case INCREMENT:
-      // case SAGA_INCREMENT:
+    case SAGA_INCREMENT_EVENT:
       return state + action.payload;
     case DECREMENT:
-      // case SAGA_DECREMENT:
+    case SAGA_DECREMENT_EVENT:
       return state - action.payload;
     case RESET:
       return action.payload;

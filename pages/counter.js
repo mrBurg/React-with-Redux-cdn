@@ -36,10 +36,10 @@ const mapStateToProps = (state) => ({ counter: state });
 
 const mapDispatchToProps = (dispatch) => ({
   decrement: () => {
-    dispatch(decrement(5));
+    dispatch(decrement(1));
   },
   increment: () => {
-    dispatch(increment(5));
+    dispatch(increment(1));
   },
   dispatch,
 });

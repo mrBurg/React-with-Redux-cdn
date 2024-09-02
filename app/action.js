@@ -3,7 +3,9 @@
 export const INCREMENT = '@@counter/INCREMENT';
 export const DECREMENT = '@@counter/DECREMENT';
 export const SAGA_INCREMENT = '@@counter/SAGA_INCREMENT';
+export const SAGA_INCREMENT_EVENT = '@@counter/SAGA_INCREMENT_EVENT';
 export const SAGA_DECREMENT = '@@counter/SAGA_DECREMENT';
+export const SAGA_DECREMENT_EVENT = '@@counter/SAGA_DECREMENT_EVENT';
 export const RESET = '@@counter/RESET';
 
 export const increment = (payload = 1) => ({ type: INCREMENT, payload });
@@ -18,11 +20,13 @@ export const sagaDecrement = (payload = 1) => ({
 });
 export const reset =
   (data = 0) =>
-  async (dispatch, _getState) => {
+  async (dispatch, getState) => {
+    const { counter } = getState();
+
     new Promise((resolve) => {
       setTimeout(resolve, 1000);
     }).then(() => {
-      dispatch({ type: RESET, payload: data });
+      dispatch({ type: RESET, payload: counter - counter });
     });
   };
 
