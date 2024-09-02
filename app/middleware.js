@@ -1,7 +1,9 @@
 'use strict';
 
-export const logger = ({ getState }) => {
-  return (next) => (action) => {
+export const logger =
+  ({ getState }) =>
+  (next) =>
+  (action) => {
     console.log('will dispatch', action);
 
     // Call the next dispatch method in the middleware chain.
@@ -13,4 +15,3 @@ export const logger = ({ getState }) => {
     // a middleware further in chain changed it.
     return returnValue;
   };
-};

@@ -1,6 +1,6 @@
 'use strict';
 
-import { INCREMENT, DECREMENT, UPDATE_POSTS } from '/app/action.js';
+import { INCREMENT, DECREMENT, RESET, UPDATE_POSTS } from '/app/action.js';
 
 export const counterReducer = (state = 0, action) => {
   switch (action.type) {
@@ -8,6 +8,8 @@ export const counterReducer = (state = 0, action) => {
       return state + action.payload;
     case DECREMENT:
       return state - action.payload;
+    case RESET:
+      return action.payload;
     default:
       return state;
   }

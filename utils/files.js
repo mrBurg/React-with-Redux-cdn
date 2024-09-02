@@ -22,14 +22,20 @@ const addStyle = (path, atBegin = false, callback = () => void 0) => {
   document.head.appendChild(link);
 };
 
-export const appendStyle = (path, callback) => addStyle(path, false, callback);
-export const prependStyle = (path, callback) => addStyle(path, true, callback);
+export const appendStyle = (path, callback) => {
+  addStyle(path, false, callback);
+};
+export const prependStyle = (path, callback) => {
+  addStyle(path, true, callback);
+};
 
 export const appendScript = (path, callback = () => void 0) => {
   const script = document.createElement('script');
   const id = path.split('/').at(-1).split('.')[0].toLowerCase();
 
-  script.onload = () => callback();
+  script.onload = () => {
+    callback();
+  };
   script.setAttribute('id', `${id}-${generateUID()}`);
   script.setAttribute('type', 'text/javascript');
   script.setAttribute('src', path);

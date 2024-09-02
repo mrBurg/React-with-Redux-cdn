@@ -2,7 +2,7 @@
 
 import { appendStyle } from '/utils/files.js';
 import { SimpleButton } from '/components/ui/SimpleButton/SimpleButton.js';
-import { increment, decrement } from '/app/action.js';
+import { increment, decrement, reset } from '/app/action.js';
 
 appendStyle('/components/Counter/Counter.css');
 
@@ -15,8 +15,17 @@ export const Counter = () => {
 
   const dispatch = useDispatch();
 
-  const IncrementHandle = useCallback(() => dispatch(increment(2)), [dispatch]);
-  const decrementHandle = useCallback(() => dispatch(decrement(2)), [dispatch]);
+  const IncrementHandle = useCallback(() => {
+    dispatch(increment(2));
+  }, [dispatch]);
+
+  const decrementHandle = useCallback(() => {
+    dispatch(decrement(2));
+  }, [dispatch]);
+
+  const resetHandle = useCallback(() => {
+    dispatch(reset());
+  }, [dispatch]);
 
   return create(
     'div',
@@ -28,6 +37,7 @@ export const Counter = () => {
     ),
     create(SimpleButton, { onClick: decrementHandle }, 'Decrement'),
     create(SimpleButton, { onClick: IncrementHandle }, 'Increment'),
+    create(SimpleButton, { onClick: resetHandle }, 'Reset'),
     create(
       'div',
       { className: 'counter__scoreboard' },
@@ -35,9 +45,21 @@ export const Counter = () => {
     ),
     create(
       SimpleButton,
-      { onClick: () => setCount((count) => count - 1) },
+      {
+        onClick: () => {
+          setCount((count) => count - 1);
+        },
+      },
       '-'
     ),
-    create(SimpleButton, { onClick: () => setCount((count) => count + 1) }, '+')
+    create(
+      SimpleButton,
+      {
+        onClick: () => {
+          setCount((count) => count + 1);
+        },
+      },
+      '+'
+    )
   );
 };

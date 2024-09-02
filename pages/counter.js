@@ -30,8 +30,12 @@ class CounterComponent extends Component {
 const mapStateToProps = (state) => ({ counter: state });
 
 const mapDispatchToProps = (dispatch) => ({
-  decrement: () => dispatch(decrement(5)),
-  increment: () => dispatch(increment(5)),
+  decrement: () => {
+    dispatch(decrement(5));
+  },
+  increment: () => {
+    dispatch(increment(5));
+  },
   // dispatch,
 });
 const Counter = connect(mapStateToProps, mapDispatchToProps)(CounterComponent);
