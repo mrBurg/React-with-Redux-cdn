@@ -6,6 +6,6 @@
 }
 
 .counter__scoreboard {
-  grid-column: 1 / 4;
+  grid-column: 1 / 6;
   text-align: center;
 }

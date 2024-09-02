@@ -11,7 +11,7 @@ const { connect } = ReactRedux;
 
 class CounterComponent extends Component {
   render() {
-    const { counter, increment, decrement } = this.props;
+    const { counter, increment, decrement, dispatch } = this.props;
 
     return create(
       'div',
@@ -22,7 +22,12 @@ class CounterComponent extends Component {
         `Count: ${counter.counter}`
       ),
       create(SimpleButton, { onClick: decrement }, 'Decrement'),
-      create(SimpleButton, { onClick: increment }, 'Increment')
+      create(SimpleButton, { onClick: increment }, 'Increment'),
+      create(
+        SimpleButton,
+        { onClick: () => dispatch(increment) },
+        'Alternative increment'
+      )
     );
   }
 }
@@ -36,7 +41,7 @@ const mapDispatchToProps = (dispatch) => ({
   increment: () => {
     dispatch(increment(5));
   },
-  // dispatch,
+  dispatch,
 });
 const Counter = connect(mapStateToProps, mapDispatchToProps)(CounterComponent);
 

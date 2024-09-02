@@ -2,7 +2,13 @@
 
 import { appendStyle } from '/utils/files.js';
 import { SimpleButton } from '/components/ui/SimpleButton/SimpleButton.js';
-import { increment, decrement, reset } from '/app/action.js';
+import {
+  increment,
+  decrement,
+  sagaIncrement,
+  sagaDecrement,
+  reset,
+} from '/app/action.js';
 
 appendStyle('/components/Counter/Counter.css');
 
@@ -23,6 +29,14 @@ export const Counter = () => {
     dispatch(decrement(2));
   }, [dispatch]);
 
+  const sagaIncrementHandle = useCallback(() => {
+    dispatch(sagaIncrement(3));
+  }, [dispatch]);
+
+  const sagaDecrementHandle = useCallback(() => {
+    dispatch(sagaDecrement(3));
+  }, [dispatch]);
+
   const resetHandle = useCallback(() => {
     dispatch(reset());
   }, [dispatch]);
@@ -37,6 +51,8 @@ export const Counter = () => {
     ),
     create(SimpleButton, { onClick: decrementHandle }, 'Decrement'),
     create(SimpleButton, { onClick: IncrementHandle }, 'Increment'),
+    create(SimpleButton, { onClick: sagaDecrementHandle }, 'Saga decrement'),
+    create(SimpleButton, { onClick: sagaIncrementHandle }, 'Saga increment'),
     create(SimpleButton, { onClick: resetHandle }, 'Reset'),
     create(
       'div',
