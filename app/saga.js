@@ -1,27 +1,22 @@
 'use strict';
 
-import {
-  SAGA_INCREMENT,
-  SAGA_DECREMENT,
-  SAGA_INCREMENT_EVENT,
-  SAGA_DECREMENT_EVENT,
-} from '/app/action.js';
+import { SAGA_INCREMENT, SAGA_DECREMENT } from '/app/action.js';
 
 const { takeEvery, call, put } = ReduxSaga.effects;
 
 export const delay = (ms) =>
-  new Promise((res) => {
-    setTimeout(res, ms);
+  new Promise((resolve) => {
+    setTimeout(resolve, ms);
   });
 
 function* sagaIncrementHandler(data) {
   yield call(delay, 1000);
-  yield put({ ...data, type: SAGA_INCREMENT_EVENT });
+  yield put({ ...data, type: `${SAGA_INCREMENT}_ACTION` });
 }
 
 function* sagaDecrementHandler(data) {
   yield call(delay, 1000);
-  yield put({ ...data, type: SAGA_DECREMENT_EVENT });
+  yield put({ ...data, type: `${SAGA_DECREMENT}_ACTION` });
 }
 
 export function* rootSaga() {
@@ -29,8 +24,7 @@ export function* rootSaga() {
   yield takeEvery(SAGA_DECREMENT, sagaDecrementHandler);
 }
 
-/* import { call, put, takeEvery } from 'redux-saga/effects';
-
+/*
 function* fetchDataSaga() {
   try {
     yield put({ type: 'FETCH_DATA_REQUEST' });
@@ -41,4 +35,4 @@ function* fetchDataSaga() {
     yield put({ type: 'FETCH_DATA_FAILURE', payload: error });
   }
 }
- */
+*/

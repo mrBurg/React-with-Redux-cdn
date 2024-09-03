@@ -1,23 +1,23 @@
 'use strict';
 
 import {
-  INCREMENT,
-  DECREMENT,
-  RESET,
-  UPDATE_POSTS,
-  SAGA_INCREMENT_EVENT,
-  SAGA_DECREMENT_EVENT,
+  INCREMENT_ACTION,
+  DECREMENT_ACTION,
+  RESET_ACTION,
+  UPDATE_POSTS_ACTION,
+  SAGA_INCREMENT_ACTION,
+  SAGA_DECREMENT_ACTION,
 } from '/app/action.js';
 
 export const counterReducer = (state = 0, action) => {
   switch (action.type) {
-    case INCREMENT:
-    case SAGA_INCREMENT_EVENT:
+    case INCREMENT_ACTION:
+    case SAGA_INCREMENT_ACTION:
       return state + action.payload;
-    case DECREMENT:
-    case SAGA_DECREMENT_EVENT:
+    case DECREMENT_ACTION:
+    case SAGA_DECREMENT_ACTION:
       return state - action.payload;
-    case RESET:
+    case RESET_ACTION:
       return action.payload;
     default:
       return state;
@@ -26,7 +26,7 @@ export const counterReducer = (state = 0, action) => {
 
 export const postsReducer = (state = [], action) => {
   switch (action.type) {
-    case UPDATE_POSTS:
+    case UPDATE_POSTS_ACTION:
       return action.payload;
     default:
       return state;

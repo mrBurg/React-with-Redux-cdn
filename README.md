@@ -1,3 +1,7 @@
+<!--contentfull yarn contentfull-->
+<!--vue devtools-->
+<!--concurrently -->
+
 #1. JSONPlaceholder
 Описание: Это бесплатный фальшивый API для тестирования и прототипирования. Он предоставляет данные, такие как пользователи, посты, комментарии, альбомы и фотографии.
 URL: https://jsonplaceholder.typicode.com/
