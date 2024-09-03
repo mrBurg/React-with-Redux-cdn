@@ -1,4 +1,7 @@
 .simple-button {
   padding: 0.5em;
+}
+
+.simple-button:not(:disabled) {
   cursor: pointer;
 }

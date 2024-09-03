@@ -11,27 +11,29 @@ export const SAGA_DECREMENT_ACTION = '@@counter/SAGA_DECREMENT_ACTION';
 
 export const RESET_ACTION = '@@counter/RESET_ACTION';
 
-export const increment = (payload = 1) => ({ type: INCREMENT_ACTION, payload });
-export const decrement = (payload = 1) => ({ type: DECREMENT_ACTION, payload });
-export const sagaIncrement = (payload = 1) => ({
+export const BLOCK_BUTTONS_ACTION = '@@counter/BLOCK_BUTTONS_ACTION';
+
+export const increment = (payload) => ({ type: INCREMENT_ACTION, payload });
+export const decrement = (payload) => ({ type: DECREMENT_ACTION, payload });
+export const sagaIncrement = (payload) => ({
   type: SAGA_INCREMENT,
   payload,
 });
-export const sagaDecrement = (payload = 1) => ({
+export const sagaDecrement = (payload) => ({
   type: SAGA_DECREMENT,
   payload,
 });
-export const reset =
-  (data = 0) =>
-  async (dispatch /* getState */) => {
-    // const { counter } = getState();
+export const reset = () => async (dispatch /* getState */) => {
+  // const { counter } = getState();
+  dispatch({ type: BLOCK_BUTTONS_ACTION, payload: true });
 
-    new Promise((resolve) => {
-      setTimeout(resolve, 1000);
-    }).then(() => {
-      dispatch({ type: RESET_ACTION, payload: data });
-    });
-  };
+  new Promise((resolve) => {
+    setTimeout(resolve, 1000);
+  }).then(() => {
+    dispatch({ type: RESET_ACTION, payload: 0 });
+    dispatch({ type: BLOCK_BUTTONS_ACTION, payload: false });
+  });
+};
 
 export const UPDATE_POSTS_ACTION = '@posts/UPDATE_POSTS_ACTION';
 

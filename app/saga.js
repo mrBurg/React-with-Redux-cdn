@@ -1,6 +1,10 @@
 'use strict';
 
-import { SAGA_INCREMENT, SAGA_DECREMENT } from '/app/action.js';
+import {
+  SAGA_INCREMENT,
+  SAGA_DECREMENT,
+  BLOCK_BUTTONS_ACTION,
+} from '/app/action.js';
 
 const { takeEvery, call, put } = ReduxSaga.effects;
 
@@ -10,13 +14,17 @@ export const delay = (ms) =>
   });
 
 function* sagaIncrementHandler(data) {
+  yield put({ type: BLOCK_BUTTONS_ACTION, payload: true });
   yield call(delay, 1000);
   yield put({ ...data, type: `${SAGA_INCREMENT}_ACTION` });
+  yield put({ type: BLOCK_BUTTONS_ACTION, payload: false });
 }
 
 function* sagaDecrementHandler(data) {
+  yield put({ type: BLOCK_BUTTONS_ACTION, payload: true });
   yield call(delay, 1000);
   yield put({ ...data, type: `${SAGA_DECREMENT}_ACTION` });
+  yield put({ type: BLOCK_BUTTONS_ACTION, payload: false });
 }
 
 export function* rootSaga() {

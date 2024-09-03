@@ -1,7 +1,7 @@
 'use strict';
 
 import { appendStyle } from '/utils/files.js';
-import { increment, decrement } from '/app/action.js';
+import { increment, decrement, reset } from '/app/action.js';
 import { SimpleButton } from '/components/ui/SimpleButton/SimpleButton.js';
 
 appendStyle('/components/Counter/Counter.css');
@@ -19,20 +19,33 @@ class CounterComponent extends Component {
       create(
         'div',
         { className: 'counter__scoreboard' },
-        `Count: ${counter.counter}`
+        `Count: ${counter.value}`
       ),
-      create(SimpleButton, { onClick: decrement }, 'Decrement'),
-      create(SimpleButton, { onClick: increment }, 'Increment'),
       create(
         SimpleButton,
-        { onClick: () => dispatch(increment) },
+        { onClick: decrement, disabled: counter.disabled },
+        'Decrement'
+      ),
+      create(
+        SimpleButton,
+        { onClick: increment, disabled: counter.disabled },
+        'Increment'
+      ),
+      create(
+        SimpleButton,
+        { onClick: () => dispatch(increment), disabled: counter.disabled },
         'Alternative increment'
+      ),
+      create(
+        SimpleButton,
+        { onClick: () => dispatch(reset()), disabled: counter.disabled },
+        'reset'
       )
     );
   }
 }
 
-const mapStateToProps = (state) => ({ counter: state });
+const mapStateToProps = (state) => ({ counter: state.counter });
 
 const mapDispatchToProps = (dispatch) => ({
   decrement: () => {

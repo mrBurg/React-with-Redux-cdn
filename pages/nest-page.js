@@ -35,14 +35,11 @@ export default () => {
       {
         style: {
           display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
         },
       },
       create(
         'div',
-        null,
+        { style: { flexShrink: 0, overflowY: 'scroll', height: '500px' } },
         posts.map((item) =>
           create(
             'div',
@@ -56,10 +53,19 @@ export default () => {
         create(
           'div',
           null,
-          _.find(posts, ({ id }) => String(id) == pageId).title,
-          create('br'),
-          _.find(posts, ({ id }) => String(id) == pageId).body
-        ),
+          (() => {
+            const { title, body } = _.find(
+              posts,
+              ({ id }) => String(id) == pageId
+            );
+
+            return create(Fragment, null, title, create('br'), body);
+          })()
+        )
+    ),
+    create(
+      'div',
+      { style: { textAlign: 'center' } },
       create(Link, { to: '/page' }, 'To Top')
     )
   );

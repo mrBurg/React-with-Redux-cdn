@@ -7,18 +7,24 @@ import {
   UPDATE_POSTS_ACTION,
   SAGA_INCREMENT_ACTION,
   SAGA_DECREMENT_ACTION,
+  BLOCK_BUTTONS_ACTION,
 } from '/app/action.js';
 
-export const counterReducer = (state = 0, action) => {
+export const counterReducer = (
+  state = { value: 0, disabled: false },
+  action
+) => {
   switch (action.type) {
     case INCREMENT_ACTION:
     case SAGA_INCREMENT_ACTION:
-      return state + action.payload;
+      return { ...state, value: state.value + action.payload };
     case DECREMENT_ACTION:
     case SAGA_DECREMENT_ACTION:
-      return state - action.payload;
+      return { ...state, value: state.value - action.payload };
     case RESET_ACTION:
-      return action.payload;
+      return { ...state, value: action.payload };
+    case BLOCK_BUTTONS_ACTION:
+      return { ...state, disabled: action.payload };
     default:
       return state;
   }

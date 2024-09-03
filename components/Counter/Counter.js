@@ -16,8 +16,8 @@ const { createElement: create, useState, useCallback } = React;
 const { useDispatch, useSelector } = ReactRedux;
 
 export const Counter = () => {
-  const counter = useSelector(({ counter }) => counter);
-  const [count, setCount] = useState(counter);
+  const { value, disabled } = useSelector(({ counter }) => counter);
+  const [count, setCount] = useState(value);
 
   const dispatch = useDispatch();
 
@@ -44,16 +44,20 @@ export const Counter = () => {
   return create(
     'div',
     { className: 'counter' },
+    create('div', { className: 'counter__scoreboard' }, `Store state ${value}`),
+    create(SimpleButton, { disabled, onClick: decrementHandle }, 'Decrement'),
+    create(SimpleButton, { disabled, onClick: IncrementHandle }, 'Increment'),
     create(
-      'div',
-      { className: 'counter__scoreboard' },
-      `Store state ${counter}`
+      SimpleButton,
+      { disabled, onClick: sagaDecrementHandle },
+      'Saga decrement'
     ),
-    create(SimpleButton, { onClick: decrementHandle }, 'Decrement'),
-    create(SimpleButton, { onClick: IncrementHandle }, 'Increment'),
-    create(SimpleButton, { onClick: sagaDecrementHandle }, 'Saga decrement'),
-    create(SimpleButton, { onClick: sagaIncrementHandle }, 'Saga increment'),
-    create(SimpleButton, { onClick: resetHandle }, 'Reset'),
+    create(
+      SimpleButton,
+      { disabled, onClick: sagaIncrementHandle },
+      'Saga increment'
+    ),
+    create(SimpleButton, { disabled, onClick: resetHandle }, 'Reset'),
     create(
       'div',
       { className: 'counter__scoreboard' },

@@ -6,12 +6,18 @@ appendStyle('/components/ui/SimpleButton/SimpleButton.css');
 
 const { createElement: create } = React;
 
-export const SimpleButton = ({ children, className, onClick = _.noop }) =>
+export const SimpleButton = ({
+  children,
+  className,
+  disabled,
+  onClick = _.noop,
+}) =>
   create(
     'button',
     {
       className: classNames('simple-button', className),
       onClick,
+      disabled,
     },
     children
   );
